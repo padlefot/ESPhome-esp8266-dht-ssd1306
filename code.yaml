@@ -30,12 +30,12 @@ time:
 
 sensor:
   - platform: homeassistant
-    id: inside_temperature
+    id: dht_temp
     entity_id: sensor.esp_cellar_temperature
     internal: true
 
   - platform: homeassistant
-    id: outside_temperature
+    id: dht_hum
     entity_id: sensor.esp_cellar_humidity
     internal: true
     
@@ -85,11 +85,11 @@ display:
 
       // Print inside temperature (from homeassistant sensor)
       if (id(inside_temperature).has_state()) {
-        it.printf(127, 23, id(font3), TextAlign::TOP_RIGHT , "%.1f°", id(inside_temperature).state);
+        it.printf(127, 23, id(font3), TextAlign::TOP_RIGHT , "%.1f°", id(dht_temp).state);
       }
 
       // Print outside temperature (from homeassistant sensor)
       if (id(outside_temperature).has_state()) {
-        it.printf(127, 60, id(font3), TextAlign::BASELINE_RIGHT , "%.1f°", id(outside_temperature).state);
+        it.printf(127, 60, id(font3), TextAlign::BASELINE_RIGHT , "%.1f%%", id(dht_hum).state);
       }
       
